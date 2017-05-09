@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  zoom: 110%;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+p {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+header {
+  background: #404041;
+}
+fieldset {
+  padding: 20px;
+}
+.header-first-word {
+  font-weight: bold;
+  color: #ED458B;
+}
+.header-second-word {
+  font-weight: 300;
+  color: #E6E7E8;
+}
+.inputNumber {
+  width: 250px;
+  font-family: inherit;
+  font-size: 15px;
+}
+button {
+  font-family: inherit;
+  background-color: #929497;
+  color: #FFFFFF;
+  border-radius: 10px;
+  border: none;
+  width: 110px;
+  height: 20px;
+  font-weight: 300;
+}
+.clear-submit-btn {
+  padding: 0;
+}
+.clear-submit-btn button {
+  margin: 0 10px;
+  font-size: 0.85em;
+  width: 115px;
+}
+.resetButton {
+  width: 250px;
+}
+.display {
+  padding: 25px;
+}
+.display span {
+  display: block;
+}
+.resetButton {
+  margin-bottom: 10px;
+}
+button:hover {
+  background: #EB008B;
+}
+button:disabled {
+  background-color: #D0D2D3;
+}
+button:focus {
+  outline: 0;
+}
+input[type="range"]:after {
+  -webkit-appearance: none;
+  border: 1px solid black;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+main {
+  font-weight: 300;
+}
+fieldset {
+  border: none;
+}
+.fixed-text {
+  color: #404041;
+}
+.numDisplay {
+  color: #EB008B;
+  font-size: 5em;
+  margin: 0;
+}
+#min-display, #max-display {
+  display: inline-block;
+}
+#max-display {
+  margin-left: 0;
+}
+#min-display {
+  margin-right: 10px;
+}
+.two-player-option {
+  margin: 15px;
+}
+.message {
+  margin-bottom: 10px;
+}
+
+/* need to figure out how to get div="dislay" closer together

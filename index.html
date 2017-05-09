@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Number Guesser</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <header>
+      <h1><span class="header-first-word">Number </span><span class="header-second-word">Guesser</span></h1>
+    </header>
+    <main>
+      <fieldset>
+        <input type="number" name="inputNumber" value="" class="inputNumber" min="-5" max="100" onchange="handleNumberOutRange(this);" placeholder=
+        "Enter Your Guess">
+      </fieldset>
+      <div class="clear-submit-btn">
+        <button type="button" name="inputButton" class="inputButton">Guess</button>
+        <button type="button" id="clearBtn">Clear</button>
+      </div>
+      <div class="display">
+        <span class="fixed-text">Your last guess was</span>
+        <span class="numDisplay">?</span>
+        <span class="message">Guess A Number</span>
+        <span>Between</span>
+        <span class="min-max">Min: <span id="min-display">0 </span> Max: <span id="max-display">100</span></span>
+      </div>
+
+      <div class="min-max-option">
+        <button id="choose-range">Choose Your Range</button>
+      </div>
+
+      <div class="two-player-option">
+        <button id="two-player-Btn">Make It Two Player</button>
+      </div>
+
+      <button type="reset" name="button" class="resetButton">Reset</button>
+    </main>
+
+
+
+      <script type="text/javascript" src="script.js">
+
+    </script>
+  </body>
+</html>
