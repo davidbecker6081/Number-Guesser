@@ -17,17 +17,25 @@
         "Enter Your Guess">
       </fieldset>
       <div class="clear-submit-btn">
-        <button type="button" name="inputButton" class="inputButton">Guess</button>
+        <button type="button" name="inputButton" class="inputButton"
+        >Guess</button>
         <button type="button" id="clearBtn">Clear</button>
       </div>
       <div class="display">
         <span class="fixed-text">Your last guess was</span>
         <span class="numDisplay">?</span>
         <span class="message">Guess A Number</span>
-        <span>Between</span>
-        <span class="min-max">Min: <span id="min-display">0 </span> Max: <span id="max-display">100</span></span>
       </div>
-
+        <div class="container-for-min-max">
+          <p class="min-max-text">Min</p>
+          <p class="min-max-text">Max</p>
+        </div>
+        <fieldset class="min-max-input-fields">
+          <input type="number" onchange="handleNumberOutRange(this);" id="min-display">
+          <input type="number" onchange="handleNumberOutRange(this);" id="max-display">
+        </fieldset>
+        
+    <div class="container-element-minmax-player">
       <div class="min-max-option">
         <button id="choose-range">Choose Your Range</button>
       </div>
@@ -35,6 +43,7 @@
       <div class="two-player-option">
         <button id="two-player-Btn">Make It Two Player</button>
       </div>
+    </div>
 
       <button type="reset" name="button" class="resetButton">Reset</button>
     </main>

@@ -115,6 +115,7 @@ function initialStateTwoPlayer() {
   twoPlayerCheck();
 }
 
+
 function minGreaterThanMax() {
   numDisplay.textContent = "DON'T BE DUMB!";
   messageDisplay.textContent = "That won't work!";
@@ -189,6 +190,7 @@ function twoPlayerCheck() {
   }
 }
 
+
 function userMinMaxPrompt() {
   minNumber = parseInt(prompt("what min number?"));
   maxNumber = parseInt(prompt("what max number?"));
@@ -218,6 +220,13 @@ function winGameTwoPlayer() {
   increaseMinMax();
   changeMinMaxDisplay();
   generateRandomNum();
+  if (winCounter < 2) {
+      numDisplay.textContent = "Winner! Try Range Difficulty " + (winCounter+1);
+  } if (winCounter === 2) {
+    numDisplay.textContent = "Hot Shot! Try Range Difficulty " + (winCounter+1);
+  } if (winCounter >= 3) {
+    numDisplay.textContent = "Are you cheating? No Way Again!"
+  }
 }
 
 function winGameMessages() {
@@ -279,6 +288,7 @@ guessNumberSelect.addEventListener("keypress", function(e) {
 });
 
 
+
 // Two Player option
 //counter needs to increase everytime the submit button is pressed
 var twoPlayerCounter = 0
@@ -293,14 +303,33 @@ twoPlayerOption.addEventListener("click", function() {
 
 
 
+
 //Two-Player option (really as many players if we ask for # input for player #)
 //create an object for each player
-  //need a number input for this
-  //add a player 1 and player 2 object, so that we can keep track of guess amount (and guesses)
-  //when button is clicked:
+// var twoPlayerBtn = document.querySelector("#two-player-Btn");
+//
+//   //when button is clicked:
+// twoPlayerBtn.addEventListener("click", function() {
+//   //prompt players for # of players, store in variable numOfPlayers
+//   var numOfPlayers = prompt("How many players would you like to have?");
+//   var numOfPlayersAsNumber = parseInt(numOfPlayers);
+//   var playerGuess = previousGuess;
+//   var players = {};
+//
+//   for (var i = 0; i < numOfPlayersAsNumber; i++) {
+//     players["player" + i] = playerGuess;
+//   }
+//   var endNumber =;
+//   var counter = 0;
+//   //every input needs to be put into value of respective key: value pair
+//
+// })
+
     //Text above Guess Field shows up ("Player 1 Guess")
     //Text above Guess Field shows up ("Player 2 Guess") after Player 1 has pressed Submit and the guess is validated
     //Once a guess is correct, a loop will run through index values in key:value pair array (player1: [guess1, guess2, guess3]), and return key of correct value in array
+
+    //another idea
 
 
 //add a timer
