@@ -10,20 +10,17 @@ var maxDisplay = document.querySelector("#max-display");
 var twoPlayerOption = document.querySelector("#two-player-Btn");
 
 
+
 var previousGuess = 0;
 var randomNum = null;
 var integerValue = parseInt(guessNumberSelect.value);
 var maxNumber = 100;
 var minNumber = 0;
+var winCounter = 0;
+
+initialState();
 
 
-
-generateRandomNum();
-originalBtnStates();
-resetBtn.disabled = true;
-handleNumberOutRange();
-noNumberInput();
-enableButton();
 
 
 
@@ -45,7 +42,6 @@ function checkNumber() {
 }
 
 function clearInputValue() {
-  //clear input value
   guessNumberSelect.value = "";
 }
 
@@ -56,6 +52,10 @@ function enableButton() {
     resetBtn.disabled = false;
   }
   noNumberInput();
+}
+
+function focusState() {
+  guessNumberSelect.focus();
 }
 
 function generateRandomNum() {
@@ -76,6 +76,48 @@ function increaseMinMax() {
   minNumber = minNumber - 10;
 }
 
+function initialState() {
+  generateRandomNum();
+  originalBtnStates();
+  resetBtn.disabled = true;
+  handleNumberOutRange();
+  noNumberInput();
+  enableButton();
+}
+
+function initialStateTwoPlayer() {
+  generateRandomNum();
+  originalBtnStates();
+  resetBtn.disabled = true;
+// need to rewrite for two player options
+  handleNumberOutRange();
+  noNumberInput();
+  enableButton();
+  twoPlayerCheck();
+}
+
+function minGreaterThanMax() {
+  numDisplay.textContent = "DON'T BE DUMB!";
+  messageDisplay.textContent = "That won't work!";
+  guessNumberSelect.placeholder = "Let's use our brain this time";
+  guessNumberSelect.disabled = true;
+  numDisplayInvalid();
+  originalBtnStates();
+}
+
+function minMaxInvalidEntry() {
+  numDisplay.textContent = "THOSE AREN'T NUMBERS!";
+  originalBtnStates();
+  guessNumberSelect.disabled = true;
+  guessNumberSelect.placeholder = "Don't even think about it!";
+  numDisplayInvalid();
+}
+
+function numDisplayInvalid() {
+  minDisplay.textContent = "?";
+  maxDisplay.textContent = "?";
+}
+
 function noNumberInput() {
   if(guessNumberSelect.value == "") {
     originalBtnStates();
@@ -87,28 +129,80 @@ function originalBtnStates() {
   clearBtn.disabled = true;
 }
 
+function originalMinMax() {
+  minNumber = 0;
+  maxNumber = 100;
+  changeMinMaxDisplay();
+}
+
+
+function submit() {
+  previousGuess = parseInt(guessNumberSelect.value);
+  numDisplay.textContent = previousGuess;
+  checkNumber();
+  handleNumberOutRange();
+  clearInputValue();
+  focusState();
+}
+
+function twoPlayerCheck() {
+  if(twoPlayerCounter % 2 !== 0) {
+    messageDisplay.textContent = "Player 1 Wins!"
+  } else {
+    messageDisplay.textContent = "Player 2 Wins!"
+  }
+}
+
+function userMinMaxPrompt() {
+  minNumber = parseInt(prompt("what min number?"));
+  maxNumber = parseInt(prompt("what max number?"));
+}
+
+function userPickRange() {
+  generateRandomNum();
+  changeMinMaxDisplay();
+  numDisplay.textContent = "?";
+  messageDisplay.textContent = "Guess a Number";
+  guessNumberSelect.disabled = false;
+  guessNumberSelect.placeholder = "Enter Your Guess";
+  focusState();
+}
 function winGame() {
+  winCounter++;
   originalBtnStates();
   increaseMinMax();
   changeMinMaxDisplay();
   generateRandomNum();
+  if (winCounter < 2) {
+      numDisplay.textContent = "Winner! Try Range Difficulty " + (winCounter+1);
+  } if (winCounter === 2) {
+    numDisplay.textContent = "Hot Shot! Try Range Difficulty " + (winCounter+1);
+  } if (winCounter >= 3) {
+    numDisplay.textContent = "Are you cheating? No Way Again!"
+  }
 }
 
 
 
 clearBtn.addEventListener("click", function() {
   clearInputValue();
-})
+  focusState();
+});
 
 guessNumberSelect.addEventListener("input", function() {
   enableButton();
-})
+});
 
 pickMinMax.addEventListener("click", function() {
-  minNumber = parseInt(prompt("what min number?"));
-  maxNumber = parseInt(prompt("what max number?"));
-  generateRandomNum();
-  changeMinMaxDisplay();
+  userMinMaxPrompt();
+  if (minNumber >= maxNumber) {
+      minGreaterThanMax();
+  } else if (isNaN(minNumber) || isNaN(maxNumber)) {
+      minMaxInvalidEntry();
+  } else {
+      userPickRange();
+  }
+  resetBtn.disabled = false;
 });
 
 resetBtn.addEventListener("click", function() {
@@ -118,25 +212,79 @@ resetBtn.addEventListener("click", function() {
   numDisplay.textContent = "?";
   messageDisplay.textContent = "Guess a Number";
   originalBtnStates();
+  originalMinMax();
   resetBtn.disabled = true;
-})
+  counter = 0;
+  twoPlayerCounter = 0;
+});
 
 submitBtn.addEventListener("click", function() {
-  console.log("guessNumberSelect ", guessNumberSelect)
-  previousGuess = parseInt(guessNumberSelect.value);
-  numDisplay.textContent = previousGuess;
-  checkNumber();
-  handleNumberOutRange();
-})
+  submit();
+});
+
+// How do I do this??????
+guessNumberSelect.addEventListener("keypress", function(e) {
+  if (e.keyCode == 13) {
+    submitBtn.click();
+  } else {
+    return true;
+  }
+});
+
+
+
+// Two Player option -
+var twoPlayerCounter = 0
+twoPlayerOption.addEventListener("click", function() {
+  function initialStateTwoPlayer() {
+    generateRandomNum();
+    originalBtnStates();
+    resetBtn.disabled = true;
+    handleNumberOutRange();
+    noNumberInput();
+    enableButton();
+  }
+});
+
+function twoPlayerCheck() {
+  if(twoPlayerCounter % 2 !== 0) {
+    messageDisplay.textContent = "Player 1 Wins!"
+  } else {
+    messageDisplay.textContent = "Player 2 Wins!"
+  }
+}
+
+
+
+
+
 
 //Two-Player option (really as many players if we ask for # input for player #)
 //create an object for each player
-  //need a number input for this
-  //add a player 1 and player 2 object, so that we can keep track of guess amount (and guesses)
-  //when button is clicked:
+// var twoPlayerBtn = document.querySelector("#two-player-Btn");
+//
+//   //when button is clicked:
+// twoPlayerBtn.addEventListener("click", function() {
+//   //prompt players for # of players, store in variable numOfPlayers
+//   var numOfPlayers = prompt("How many players would you like to have?");
+//   var numOfPlayersAsNumber = parseInt(numOfPlayers);
+//   var playerGuess = previousGuess;
+//   var players = {};
+//
+//   for (var i = 0; i < numOfPlayersAsNumber; i++) {
+//     players["player" + i] = playerGuess;
+//   }
+//   var endNumber =;
+//   var counter = 0;
+//   //every input needs to be put into value of respective key: value pair
+//
+// })
+
     //Text above Guess Field shows up ("Player 1 Guess")
     //Text above Guess Field shows up ("Player 2 Guess") after Player 1 has pressed Submit and the guess is validated
     //Once a guess is correct, a loop will run through index values in key:value pair array (player1: [guess1, guess2, guess3]), and return key of correct value in array
+
+    //another idea
 
 
 //add a timer
