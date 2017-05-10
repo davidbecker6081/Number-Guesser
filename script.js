@@ -85,16 +85,16 @@ function initialState() {
   enableButton();
 }
 
-function initialStateTwoPlayer() {
-  generateRandomNum();
-  originalBtnStates();
-  resetBtn.disabled = true;
-// need to rewrite for two player options
-  handleNumberOutRange();
-  noNumberInput();
-  enableButton();
-  twoPlayerCheck();
-}
+// function initialStateTwoPlayer() {
+//   generateRandomNum();
+//   originalBtnStates();
+//   resetBtn.disabled = true;
+// // need to rewrite for two player options
+//   handleNumberOutRange();
+//   noNumberInput();
+//   enableButton();
+//   twoPlayerCheck();
+// }
 
 function minGreaterThanMax() {
   numDisplay.textContent = "DON'T BE DUMB!";
@@ -145,13 +145,13 @@ function submit() {
   focusState();
 }
 
-function twoPlayerCheck() {
-  if(twoPlayerCounter % 2 !== 0) {
-    messageDisplay.textContent = "Player 1 Wins!"
-  } else {
-    messageDisplay.textContent = "Player 2 Wins!"
-  }
-}
+// function twoPlayerCheck() {
+//   if(twoPlayerCounter % 2 !== 0) {
+//     messageDisplay.textContent = "Player 1 Wins!"
+//   } else {
+//     messageDisplay.textContent = "Player 2 Wins!"
+//   }
+// }
 
 function userMinMaxPrompt() {
   minNumber = parseInt(prompt("what min number?"));
@@ -215,7 +215,7 @@ resetBtn.addEventListener("click", function() {
   originalMinMax();
   resetBtn.disabled = true;
   counter = 0;
-  twoPlayerCounter = 0;
+  // twoPlayerCounter = 0;
 });
 
 submitBtn.addEventListener("click", function() {
@@ -233,26 +233,26 @@ guessNumberSelect.addEventListener("keypress", function(e) {
 
 
 
-// Two Player option -
-var twoPlayerCounter = 0
-twoPlayerOption.addEventListener("click", function() {
-  function initialStateTwoPlayer() {
-    generateRandomNum();
-    originalBtnStates();
-    resetBtn.disabled = true;
-    handleNumberOutRange();
-    noNumberInput();
-    enableButton();
-  }
-});
-
-function twoPlayerCheck() {
-  if(twoPlayerCounter % 2 !== 0) {
-    messageDisplay.textContent = "Player 1 Wins!"
-  } else {
-    messageDisplay.textContent = "Player 2 Wins!"
-  }
-}
+// // Two Player option -
+// var twoPlayerCounter = 0
+// twoPlayerOption.addEventListener("click", function() {
+//   function initialStateTwoPlayer() {
+//     generateRandomNum();
+//     originalBtnStates();
+//     resetBtn.disabled = true;
+//     handleNumberOutRange();
+//     noNumberInput();
+//     enableButton();
+//   }
+// });
+//
+// function twoPlayerCheck() {
+//   if(twoPlayerCounter % 2 !== 0) {
+//     messageDisplay.textContent = "Player 1 Wins!"
+//   } else {
+//     messageDisplay.textContent = "Player 2 Wins!"
+//   }
+// }
 
 
 
