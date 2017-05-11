@@ -29,10 +29,10 @@ header {
 main {
   font-weight: 300;
 }
-p {
+/*p {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
-}
+}*/
 button:hover {
   background: #EB008B;
 }
@@ -114,7 +114,8 @@ input[type=number]::-webkit-outer-spin-button {
   width: 50%;
   padding: 0;
 }
-.min-max-option, .submit-range-div {
+.min-max-option,
+.submit-range-div {
   display: inline-block;
   margin: 1%;
 }

@@ -233,14 +233,14 @@ submitRange.addEventListener("click", function() {
   minNumber = parseInt(minDisplay.value);
   maxNumber = parseInt(maxDisplay.value);
   if (minNumber === maxNumber) {
-      minMaxInvalidEntry();
-      minDisplay.focus();
+    minMaxInvalidEntry();
+    minDisplay.focus();
   } else if (isNaN(minNumber) || isNaN(maxNumber)) {
-      minMaxInvalidEntry();
-      minDisplay.focus();
+    minMaxInvalidEntry();
+    minDisplay.focus();
   } else if (minNumber >= maxNumber) {
-      minGreaterThanMax();
-      minDisplay.focus();
+    minGreaterThanMax();
+    minDisplay.focus();
   } else {
     generateRandomNum();
     numDisplay.textContent = "?";
