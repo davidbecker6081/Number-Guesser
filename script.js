@@ -1,15 +1,13 @@
-var guessNumberSelect = document.querySelector(".inputNumber");
-var submitBtn = document.querySelector(".inputButton");
-var resetBtn = document.querySelector(".resetButton");
-var numDisplay = document.querySelector(".numDisplay");
+var guessNumberSelect = document.querySelector(".input-number");
+var submitBtn = document.querySelector(".input-button");
+var resetBtn = document.querySelector(".reset-button");
+var numDisplay = document.querySelector(".num-display");
 var messageDisplay = document.querySelector(".message");
-var clearBtn = document.querySelector("#clearBtn");
+var clearBtn = document.querySelector("#clear-btn");
 var pickMinMax = document.querySelector("#choose-range");
 var minDisplay = document.querySelector("#min-display");
 var maxDisplay = document.querySelector("#max-display");
-var twoPlayerOption = document.querySelector("#two-player-Btn");
-
-
+var submitRange = document.querySelector("#submit-range");
 
 var previousGuess = 0;
 var randomNum = null;
@@ -17,16 +15,31 @@ var integerValue = parseInt(guessNumberSelect.value);
 var maxNumber = 100;
 var minNumber = 0;
 var winCounter = 0;
+minDisplay.disabled = true;
+maxDisplay.disabled = true;
+minDisplay.value = 0;
+maxDisplay.value = 100;
 
 initialState();
 
+function addBlinking() {
+  minDisplay.style["animation-play-state"] = "running";
+  maxDisplay.style["animation-play-state"] = "running";
 
+  setTimeout(function () {
+    minDisplay.style["animation-play-state"] = "paused";
+    maxDisplay.style["animation-play-state"] = "paused";
+  }, 2000)
 
+}
 
+function addBlinkingGuess() {
+  guessNumberSelect.style["animation-play-state"] = "running";
+}
 
 function changeMinMaxDisplay() {
-  minDisplay.textContent = minNumber;
-  maxDisplay.textContent = maxNumber;
+  minDisplay.value = minNumber;
+  maxDisplay.value = maxNumber;
 }
 
 function checkNumber() {
@@ -83,6 +96,9 @@ function initialState() {
   handleNumberOutRange();
   noNumberInput();
   enableButton();
+  addBlinkingGuess();
+  submitRange.disabled = true;
+  focusState();
 }
 
 // function initialStateTwoPlayer() {
@@ -95,6 +111,11 @@ function initialState() {
 //   enableButton();
 //   twoPlayerCheck();
 // }
+
+function minMaxDisplayDisabled() {
+  minDisplay.disabled = false;
+  maxDisplay.disabled = false;
+}
 
 function minGreaterThanMax() {
   numDisplay.textContent = "DON'T BE DUMB!";
@@ -111,11 +132,13 @@ function minMaxInvalidEntry() {
   guessNumberSelect.disabled = true;
   guessNumberSelect.placeholder = "Don't even think about it!";
   numDisplayInvalid();
+  minDisplay.disabled = true;
+  maxDisplay.disabled = true;
 }
 
 function numDisplayInvalid() {
-  minDisplay.textContent = "?";
-  maxDisplay.textContent = "?";
+  minDisplay.value = "?";
+  maxDisplay.value = "?";
 }
 
 function noNumberInput() {
@@ -135,14 +158,21 @@ function originalMinMax() {
   changeMinMaxDisplay();
 }
 
+function refocusMinMax() {
+  minDisplay.value = null;
+  maxDisplay.value = null;
+}
 
 function submit() {
-  previousGuess = parseInt(guessNumberSelect.value);
+  if(guessNumberSelect.value) {
+    previousGuess = parseInt(guessNumberSelect.value);
+  }
   numDisplay.textContent = previousGuess;
   checkNumber();
   handleNumberOutRange();
   clearInputValue();
   focusState();
+  originalBtnStates();
 }
 
 // function twoPlayerCheck() {
@@ -153,10 +183,6 @@ function submit() {
 //   }
 // }
 
-function userMinMaxPrompt() {
-  minNumber = parseInt(prompt("what min number?"));
-  maxNumber = parseInt(prompt("what max number?"));
-}
 
 function userPickRange() {
   generateRandomNum();
@@ -167,6 +193,7 @@ function userPickRange() {
   guessNumberSelect.placeholder = "Enter Your Guess";
   focusState();
 }
+
 function winGame() {
   winCounter++;
   originalBtnStates();
@@ -175,18 +202,18 @@ function winGame() {
   generateRandomNum();
   if (winCounter < 2) {
       numDisplay.textContent = "Winner! Try Range Difficulty " + (winCounter+1);
-  } if (winCounter === 2) {
-    numDisplay.textContent = "Hot Shot! Try Range Difficulty " + (winCounter+1);
-  } if (winCounter >= 3) {
-    numDisplay.textContent = "Are you cheating? No Way Again!"
+  } else if (winCounter === 2) {
+      numDisplay.textContent = "Hot Shot! Try Range Difficulty " + (winCounter+1);
+  } else if (winCounter >= 3) {
+      numDisplay.textContent = "Are you cheating? No Way " + winCounter + " times!";
   }
+  addBlinking();
 }
-
-
 
 clearBtn.addEventListener("click", function() {
   clearInputValue();
   focusState();
+  originalBtnStates();
 });
 
 guessNumberSelect.addEventListener("input", function() {
@@ -194,35 +221,53 @@ guessNumberSelect.addEventListener("input", function() {
 });
 
 pickMinMax.addEventListener("click", function() {
-  userMinMaxPrompt();
-  if (minNumber >= maxNumber) {
-      minGreaterThanMax();
-  } else if (isNaN(minNumber) || isNaN(maxNumber)) {
-      minMaxInvalidEntry();
-  } else {
-      userPickRange();
-  }
+  minMaxDisplayDisabled();
   resetBtn.disabled = false;
+  refocusMinMax();
+  guessNumberSelect.disabled = true;
+  submitRange.disabled = false;
+  minDisplay.focus();
 });
 
+submitRange.addEventListener("click", function() {
+  minNumber = parseInt(minDisplay.value);
+  maxNumber = parseInt(maxDisplay.value);
+  if (minNumber === maxNumber) {
+      minMaxInvalidEntry();
+      minDisplay.focus();
+  } else if (isNaN(minNumber) || isNaN(maxNumber)) {
+      minMaxInvalidEntry();
+      minDisplay.focus();
+  } else if (minNumber >= maxNumber) {
+      minGreaterThanMax();
+      minDisplay.focus();
+  } else {
+    generateRandomNum();
+    numDisplay.textContent = "?";
+    messageDisplay.textContent = "Guess a Number";
+    guessNumberSelect.disabled = false;
+    guessNumberSelect.placeholder = "Enter Your Guess";
+    focusState();
+  }
+})
+
 resetBtn.addEventListener("click", function() {
-  generateRandomNum();
   previousGuess = 0;
   guessNumberSelect.value= null;
   numDisplay.textContent = "?";
   messageDisplay.textContent = "Guess a Number";
-  originalBtnStates();
   originalMinMax();
-  resetBtn.disabled = true;
-  counter = 0;
+  winCounter = 0;
   // twoPlayerCounter = 0;
+  minDisplay.disabled = true;
+  maxDisplay.disabled = true;
+  initialState();
 });
 
 submitBtn.addEventListener("click", function() {
   submit();
 });
 
-// How do I do this??????
 guessNumberSelect.addEventListener("keypress", function(e) {
   if (e.keyCode == 13) {
     submitBtn.click();

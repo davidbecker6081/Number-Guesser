@@ -11,47 +11,50 @@
     <header>
       <h1><span class="header-first-word">Number </span><span class="header-second-word">Guesser</span></h1>
     </header>
+
     <main>
+
       <fieldset>
-        <input type="number" name="inputNumber" value="" class="inputNumber" min="-5" max="100" onchange="handleNumberOutRange(this);" placeholder=
-        "Enter Your Guess">
+        <input type="number" name="inputNumber" value="" class="input-number" min="-5" max="100" onchange="handleNumberOutRange(this);" placeholder="Enter Your Guess">
       </fieldset>
-      <div class="clear-submit-btn">
-        <button type="button" name="inputButton" class="inputButton"
-        >Guess</button>
-        <button type="button" id="clearBtn">Clear</button>
+
+      <div class="clear-submit-btn-container">
+        <button type="button" name="inputButton" class="input-button">Guess</button>
+        <button type="button" id="clear-btn">Clear</button>
       </div>
+
       <div class="display">
         <span class="fixed-text">Your last guess was</span>
-        <span class="numDisplay">?</span>
+        <span class="num-display">?</span>
         <span class="message">Guess A Number</span>
       </div>
+
         <div class="container-for-min-max">
           <p class="min-max-text">Min</p>
           <p class="min-max-text">Max</p>
         </div>
+
         <fieldset class="min-max-input-fields">
           <input type="number" onchange="handleNumberOutRange(this);" id="min-display">
           <input type="number" onchange="handleNumberOutRange(this);" id="max-display">
         </fieldset>
+
+      <div class="container-element-minmax-player">
+
+        <div class="min-max-option">
+          <button id="choose-range">Choose Your Range</button>
+        </div>
+
+        <div class="submit-range-div">
+          <button id="submit-range">Submit Range</button>
+        </div>
         
-    <div class="container-element-minmax-player">
-      <div class="min-max-option">
-        <button id="choose-range">Choose Your Range</button>
       </div>
 
-      <div class="two-player-option">
-        <button id="two-player-Btn">Make It Two Player</button>
-      </div>
-    </div>
+        <button type="reset" name="button" class="reset-button">Reset</button>
 
-      <button type="reset" name="button" class="resetButton">Reset</button>
     </main>
 
-
-
-      <script type="text/javascript" src="script.js">
-
-    </script>
+      <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
