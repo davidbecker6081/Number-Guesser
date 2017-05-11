@@ -29,7 +29,7 @@ function addBlinking() {
   setTimeout(function () {
     minDisplay.style["animation-play-state"] = "paused";
     maxDisplay.style["animation-play-state"] = "paused";
-  }, 2000)
+  }, 3000)
 
 }
 
@@ -261,6 +261,7 @@ resetBtn.addEventListener("click", function() {
   // twoPlayerCounter = 0;
   minDisplay.disabled = true;
   maxDisplay.disabled = true;
+  addBlinking();
   initialState();
 });
 
