@@ -1,6 +1,7 @@
 # Number-Guesser
 **David Becker**
 
+
 - When page loads, "Enter Your Guess" input box will blink to alert you that the player can now guess a number between the default Min (0) and Max (100). All Buttons are disabled until Player puts a number into the Guess Box. 
 - The Choose Your Range is also available to the Player as an option at the page load. 
 - Once player has inputted a numerical value into the Guess Box, they can click the Guess Button to submit their guess, click the Clear Button to clear the Guess Box value, or click the Reset Button and start the game over (Min and Max reset to default and the counter that keeps track of number of wins resets. 
